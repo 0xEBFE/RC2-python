@@ -4,7 +4,6 @@
 RC2 (also known as ARC2) encryption algorithm in pure python. ECB and CBC modes are supported.
 
 ## Usage
-
 ```python
 from rc2 import * 
 
@@ -13,4 +12,8 @@ msg = bytearray('Message for encryption', 'ascii')
 encrypted = rc2_ctx.encrypt(msg, MODE_ECB)
 
 ```
+## Requirements
+
+Python 3.2 or above.
+
 (c) 2013, 0xEBFE
