@@ -247,19 +247,30 @@ def main():
     out1 = rc2.encrypt(test1, MODE_CBC, bytearray('12345678', 'ascii'), PADDING_PKCS5)
     
     if out1 != bytearray((0x52, 0x19, 0x04, 0x0C, 0x47, 0x80, 0x5D, 0xBE, 0xA7, 0xB6, 0x7C, 0xEF, 0x26, 0xEF, 0x60, 0x80)):
-        print('test1 fail')    
+        print('test1 encryption fail')
+
+    if test1 != rc2.decrypt(out1, MODE_CBC, bytearray('12345678', 'ascii'), PADDING_PKCS5):
+        print('test1 decryption fail')    
         
     rc2 = RC2(bytearray((00, 00, 00, 00, 00, 00, 00, 00)))
-    out2 = rc2.encrypt(bytearray((00, 00, 00, 00, 00, 00, 00, 00)), MODE_ECB)
+    test2 = bytearray((00, 00, 00, 00, 00, 00, 00, 00))
+    out2 = rc2.encrypt(test2, MODE_ECB)
 
     if out2 != bytearray((0xeb,0xb7,0x73,0xf9,0x93,0x27,0x8e,0xff)):
-        print('test2 fail')
+        print('test2 encryption fail')
+        
+    if test2 != rc2.decrypt(out2, MODE_ECB):
+        print('test2 decryption fail')        
         
     rc2 = RC2(bytearray((0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff)))
-    out3 = rc2.encrypt(bytearray((0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff)), MODE_ECB)
+    test3 = bytearray((0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff))
+    out3 = rc2.encrypt(test3, MODE_ECB)
 
     if out3 != bytearray((0x27,0x8b,0x27,0xe4,0x2e,0x2f,0x0d,0x49)):
-        print('test3 fail')        
+        print('test3 encryption fail')
+        
+    if test3 != rc2.decrypt(out3, MODE_ECB):
+        print('test3 decryption fail')       
 
 if __name__=='__main__':
     main()
